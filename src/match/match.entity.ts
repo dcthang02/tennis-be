@@ -13,4 +13,7 @@ export class Match {
 
   @Column()
   maxPlayers: number;
+
+  @Column()
+  note: string;
 }

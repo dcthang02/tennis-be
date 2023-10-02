@@ -9,7 +9,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      url: 'mongodb+srv://thang-1:khongcopass@cluster0.nuncdza.mongodb.net/school',
+      url: 'mongodb+srv://thang-1:khongcopass@cluster0.nuncdza.mongodb.net/tennismobile',
       autoLoadEntities: true,
       synchronize: true,
       entities: [Match],

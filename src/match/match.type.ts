@@ -10,4 +10,7 @@ export class MatchType {
 
   @Field()
   maxPlayers: number;
+
+  @Field()
+  note: string;
 }
