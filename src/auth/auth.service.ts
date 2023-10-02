@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/user.entity';
 import { MongoRepository } from 'typeorm';
@@ -11,11 +11,15 @@ export class AuthService {
   ) {}
 
   async signupByPhone(phone: string) {
-    const user = this.userRepository.create({
+    const user = this.userRepository.findOneBy({ phone });
+    if (user) {
+      throw new ConflictException('Phone number is already in use');
+    }
+    const newUser = this.userRepository.create({
       id: uuid(),
       phone,
     });
-    await this.userRepository.save(user);
+    await this.userRepository.save(newUser);
     return {
       message: 'Ok',
     };
