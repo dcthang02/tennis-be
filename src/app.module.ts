@@ -4,6 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Match } from './match/match.entity';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { User } from './user/user.entity';
 
 @Module({
   imports: [
@@ -12,13 +15,15 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       url: 'mongodb+srv://thang-1:khongcopass@cluster0.nuncdza.mongodb.net/tennismobile',
       autoLoadEntities: true,
       synchronize: true,
-      entities: [Match],
+      entities: [Match, User],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),
     MatchModule,
+    UserModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
