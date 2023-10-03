@@ -11,7 +11,8 @@ export class AuthService {
   ) {}
 
   async signupByPhone(phone: string) {
-    const user = this.userRepository.findOneBy({ phone });
+    const user = await this.userRepository.findOneBy({ phone });
+
     if (user) {
       throw new ConflictException('Phone number is already in use');
     }

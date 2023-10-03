@@ -15,6 +15,15 @@ export class MatchType {
   @Field()
   note: string;
 
+  @Field((type) => UserType)
+  owner: string;
+
   @Field((type) => [UserType])
   players: string[];
+
+  @Field((type) => [UserType])
+  pendingPlayers: string[];
+
+  @Field((type) => [UserType])
+  invitedPlayers: string[];
 }

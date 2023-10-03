@@ -18,5 +18,14 @@ export class Match {
   note: string;
 
   @Column()
+  owner: string;
+
+  @Column()
   players: string[];
+
+  @Column()
+  pendingPlayers: string[];
+
+  @Column()
+  invitedPlayers: string[];
 }

@@ -18,6 +18,15 @@ export class UserService {
     return user;
   }
 
+  async getUserById(id: string) {
+    const user = await this.userRepository.findOneBy({ id });
+    if (!user) {
+      throw new NotFoundException('User does not exist');
+    }
+
+    return user;
+  }
+
   async getUsersInListId(userIds: string[]) {
     return this.userRepository.find({
       where: {

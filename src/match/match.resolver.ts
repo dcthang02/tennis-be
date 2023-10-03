@@ -8,7 +8,7 @@ import {
 } from '@nestjs/graphql';
 import { MatchType } from './match.type';
 import { MatchService } from './match.service';
-import { CreateMatchInput } from './create-match.input';
+import { CreateMatchInput } from './dto/create-match.input';
 import { Match } from './match.entity';
 import { UserService } from 'src/user/user.service';
 
@@ -32,5 +32,20 @@ export class MatchResolver {
   @ResolveField()
   async players(@Parent() match: Match) {
     return this.userService.getUsersInListId(match.players);
+  }
+
+  @ResolveField()
+  async owner(@Parent() match: Match) {
+    return this.userService.getUserById(match.owner);
+  }
+
+  @ResolveField()
+  async pendingPlayers(@Parent() match: Match) {
+    return this.userService.getUsersInListId(match.pendingPlayers);
+  }
+
+  @ResolveField()
+  async invitedPlayers(@Parent() match: Match) {
+    return this.userService.getUsersInListId(match.invitedPlayers);
   }
 }

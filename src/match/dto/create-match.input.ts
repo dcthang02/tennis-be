@@ -17,5 +17,9 @@ export class CreateMatchInput {
 
   @IsUUID('4', { each: true })
   @Field((type) => [ID])
-  playerIds: string[];
+  invitedPlayerIds: string[];
+
+  @IsUUID('4')
+  @Field((type) => ID)
+  owner: string;
 }
