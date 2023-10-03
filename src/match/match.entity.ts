@@ -16,4 +16,7 @@ export class Match {
 
   @Column()
   note: string;
+
+  @Column()
+  players: string[];
 }

@@ -17,13 +17,14 @@ export class MatchService {
   }
 
   async createMatch(createMatchInput: CreateMatchInput) {
-    const { date, maxPlayers, note } = createMatchInput;
+    const { date, maxPlayers, note, playerIds } = createMatchInput;
 
     const match = this.matchRepository.create({
       id: uuid(),
       date: new Date(date),
       maxPlayers,
       note: note || '',
+      players: playerIds,
     });
     return this.matchRepository.save(match);
   }

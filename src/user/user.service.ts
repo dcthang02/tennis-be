@@ -17,4 +17,14 @@ export class UserService {
 
     return user;
   }
+
+  async getUsersInListId(userIds: string[]) {
+    return this.userRepository.find({
+      where: {
+        id: {
+          $in: userIds,
+        },
+      },
+    });
+  }
 }

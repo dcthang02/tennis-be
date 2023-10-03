@@ -1,11 +1,23 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { MatchType } from './match.type';
 import { MatchService } from './match.service';
 import { CreateMatchInput } from './create-match.input';
+import { Match } from './match.entity';
+import { UserService } from 'src/user/user.service';
 
 @Resolver((of) => MatchType)
 export class MatchResolver {
-  constructor(private matchService: MatchService) {}
+  constructor(
+    private matchService: MatchService,
+    private userService: UserService,
+  ) {}
 
   @Query(() => [MatchType])
   matches() {
@@ -15,5 +27,10 @@ export class MatchResolver {
   @Mutation(() => MatchType)
   createMatch(@Args('createMatchInput') createMatchInput: CreateMatchInput) {
     return this.matchService.createMatch(createMatchInput);
+  }
+
+  @ResolveField()
+  async players(@Parent() match: Match) {
+    return this.userService.getUsersInListId(match.players);
   }
 }

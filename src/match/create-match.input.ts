@@ -1,5 +1,5 @@
-import { Field, InputType } from '@nestjs/graphql';
-import { IsDateString, Min, Max, IsOptional } from 'class-validator';
+import { Field, ID, InputType } from '@nestjs/graphql';
+import { IsDateString, Min, Max, IsUUID } from 'class-validator';
 
 @InputType()
 export class CreateMatchInput {
@@ -14,4 +14,8 @@ export class CreateMatchInput {
 
   @Field({ nullable: true })
   note?: string;
+
+  @IsUUID('4', { each: true })
+  @Field((type) => [ID])
+  playerIds: string[];
 }

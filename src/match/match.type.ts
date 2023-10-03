@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { UserType } from 'src/user/user.type';
 
 @ObjectType('Match')
 export class MatchType {
@@ -13,4 +14,7 @@ export class MatchType {
 
   @Field()
   note: string;
+
+  @Field((type) => [UserType])
+  players: string[];
 }
