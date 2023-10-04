@@ -22,4 +22,8 @@ export class CreateMatchInput {
   @IsUUID('4')
   @Field((type) => ID)
   owner: string;
+
+  @IsUUID('4')
+  @Field((type) => ID)
+  stadiumId: string;
 }

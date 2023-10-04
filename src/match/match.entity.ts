@@ -28,4 +28,7 @@ export class Match {
 
   @Column()
   invitedPlayers: string[];
+
+  @Column()
+  location: string;
 }

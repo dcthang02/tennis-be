@@ -7,6 +7,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './user/user.entity';
+import { StadiumModule } from './stadium/stadium.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { User } from './user/user.entity';
     MatchModule,
     UserModule,
     AuthModule,
+    StadiumModule,
   ],
 })
 export class AppModule {}

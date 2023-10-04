@@ -4,9 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Match } from './match.entity';
 import { MatchResolver } from './match.resolver';
 import { UserModule } from 'src/user/user.module';
+import { StadiumModule } from 'src/stadium/stadium.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Match]), UserModule],
+  imports: [TypeOrmModule.forFeature([Match]), UserModule, StadiumModule],
   providers: [MatchResolver, MatchService],
 })
 export class MatchModule {}

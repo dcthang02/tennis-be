@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { StadiumType } from 'src/stadium/stadium.type';
 import { UserType } from 'src/user/user.type';
 
 @ObjectType('Match')
@@ -26,4 +27,7 @@ export class MatchType {
 
   @Field((type) => [UserType])
   invitedPlayers: string[];
+
+  @Field((type) => StadiumType, { nullable: true })
+  location: string;
 }

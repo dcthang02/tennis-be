@@ -11,12 +11,14 @@ import { MatchService } from './match.service';
 import { CreateMatchInput } from './dto/create-match.input';
 import { Match } from './match.entity';
 import { UserService } from 'src/user/user.service';
+import { StadiumService } from 'src/stadium/stadium.service';
 
 @Resolver((of) => MatchType)
 export class MatchResolver {
   constructor(
     private matchService: MatchService,
     private userService: UserService,
+    private stadiumService: StadiumService,
   ) {}
 
   @Query(() => [MatchType])
@@ -47,5 +49,16 @@ export class MatchResolver {
   @ResolveField()
   async invitedPlayers(@Parent() match: Match) {
     return this.userService.getUsersInListId(match.invitedPlayers);
+  }
+
+  @ResolveField()
+  async location(@Parent() match: Match) {
+    try {
+      const stadium = await this.stadiumService.getStadium(match.location);
+      console.log(stadium);
+      return stadium;
+    } catch (error) {
+      return null;
+    }
   }
 }

@@ -17,7 +17,7 @@ export class MatchService {
   }
 
   async createMatch(createMatchInput: CreateMatchInput) {
-    const { date, maxPlayers, note, owner, invitedPlayerIds } =
+    const { date, maxPlayers, note, owner, invitedPlayerIds, stadiumId } =
       createMatchInput;
 
     const match = this.matchRepository.create({
@@ -29,6 +29,7 @@ export class MatchService {
       invitedPlayers: invitedPlayerIds,
       players: [],
       pendingPlayers: [],
+      location: stadiumId,
     });
     return this.matchRepository.save(match);
   }
