@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './user/user.entity';
 import { StadiumModule } from './stadium/stadium.module';
+import { StatisticModule } from './statistic/statistic.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { StadiumModule } from './stadium/stadium.module';
     UserModule,
     AuthModule,
     StadiumModule,
+    StatisticModule,
   ],
 })
 export class AppModule {}

@@ -29,4 +29,7 @@ export class User {
 
   @Column()
   freeTime: boolean[][];
+
+  @Column()
+  statistic: string;
 }

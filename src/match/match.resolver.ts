@@ -55,7 +55,6 @@ export class MatchResolver {
   async location(@Parent() match: Match) {
     try {
       const stadium = await this.stadiumService.getStadium(match.location);
-      console.log(stadium);
       return stadium;
     } catch (error) {
       return null;
