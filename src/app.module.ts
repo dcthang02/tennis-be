@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { User } from './user/user.entity';
 import { StadiumModule } from './stadium/stadium.module';
 import { StatisticModule } from './statistic/statistic.module';
+import { UtilityModule } from './utility/utility.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { StatisticModule } from './statistic/statistic.module';
     AuthModule,
     StadiumModule,
     StatisticModule,
+    UtilityModule,
   ],
 })
 export class AppModule {}

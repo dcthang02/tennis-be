@@ -1,6 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { UserGender } from './user-gender.enum';
 import { StatisticType } from 'src/statistic/statistic.type';
+import { UtilityType } from 'src/utility/utility.type';
 
 @ObjectType('User')
 export class UserType {
@@ -32,4 +33,7 @@ export class UserType {
 
   @Field((type) => StatisticType, { nullable: true })
   statistic: string;
+
+  @Field((type) => UtilityType, { nullable: true })
+  utility: string;
 }

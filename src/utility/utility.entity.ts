@@ -1,8 +1,7 @@
 import { Column, Entity, ObjectIdColumn, PrimaryColumn } from 'typeorm';
-import { UserGender } from './user-gender.enum';
 
 @Entity()
-export class User {
+export class Utility {
   @ObjectIdColumn()
   _id: string;
 
@@ -10,29 +9,32 @@ export class User {
   id: string;
 
   @Column()
-  name: string;
+  racketBrand: string;
 
   @Column()
-  age: number;
+  racketParameter: string;
 
   @Column()
-  phone: string;
+  usageFee: string;
 
   @Column()
-  image: string;
+  backHand: string;
 
   @Column()
-  birthday: Date;
+  foreHand: string;
 
   @Column()
-  gender: UserGender;
+  preferredHand: string;
 
   @Column()
-  freeTime: boolean[][];
+  ballHand: string;
 
   @Column()
-  statistic: string;
+  clothing: string;
 
   @Column()
-  utility: string;
+  shoesBrand: string;
+
+  @Column()
+  shoesSize: number;
 }
