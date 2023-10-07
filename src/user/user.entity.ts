@@ -13,9 +13,6 @@ export class User {
   name: string;
 
   @Column()
-  age: number;
-
-  @Column()
   phone: string;
 
   @Column()
@@ -35,4 +32,7 @@ export class User {
 
   @Column()
   utility: string;
+
+  @Column()
+  shop: string;
 }

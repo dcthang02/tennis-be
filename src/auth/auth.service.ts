@@ -1,8 +1,13 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/user.entity';
 import { MongoRepository } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+import { AuthVerifyInput } from './auth-verify.input';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +26,22 @@ export class AuthService {
       phone,
     });
     await this.userRepository.save(newUser);
+    return {
+      message: 'Ok',
+    };
+  }
+
+  async verifyUser(authVerifyInput: AuthVerifyInput, shopId: string) {
+    const { id, birthday, name, gender } = authVerifyInput;
+    const user = await this.userRepository.findOneBy({ id });
+    if (!user) {
+      throw new NotFoundException();
+    }
+    user.birthday = new Date(birthday);
+    user.name = name;
+    user.gender = gender;
+    user.shop = shopId;
+    await this.userRepository.save(user);
     return {
       message: 'Ok',
     };
