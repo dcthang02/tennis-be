@@ -10,9 +10,15 @@ import { User } from './user/user.entity';
 import { StadiumModule } from './stadium/stadium.module';
 import { StatisticModule } from './statistic/statistic.module';
 import { UtilityModule } from './utility/utility.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
+    }),
     TypeOrmModule.forRoot({
       type: 'mongodb',
       url: 'mongodb+srv://thang-1:khongcopass@cluster0.nuncdza.mongodb.net/tennismobile',
