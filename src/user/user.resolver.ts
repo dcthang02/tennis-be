@@ -6,6 +6,7 @@ import { User } from './user.entity';
 import { StatisticService } from 'src/statistic/statistic.service';
 import { UtilityService } from 'src/utility/utility.service';
 import { ShopService } from 'src/shop/shop.service';
+import { ClubService } from 'src/club/club.service';
 
 @Resolver((of) => UserType)
 export class UserResolver {
@@ -14,6 +15,7 @@ export class UserResolver {
     private statisticService: StatisticService,
     private utilityService: UtilityService,
     private shopService: ShopService,
+    private clubService: ClubService,
   ) {}
 
   @Query((returns) => UserType)
@@ -43,6 +45,15 @@ export class UserResolver {
   async shop(@Parent() user: User) {
     try {
       return await this.shopService.getShopById(user.shop);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  @ResolveField()
+  async club(@Parent() user: User) {
+    try {
+      return await this.clubService.getClubById(user.club);
     } catch (error) {
       return null;
     }

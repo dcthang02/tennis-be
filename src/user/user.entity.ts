@@ -35,4 +35,7 @@ export class User {
 
   @Column()
   shop: string;
+
+  @Column()
+  club: string;
 }

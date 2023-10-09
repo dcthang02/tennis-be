@@ -3,6 +3,7 @@ import { UserGender } from './user-gender.enum';
 import { StatisticType } from 'src/statistic/statistic.type';
 import { UtilityType } from 'src/utility/utility.type';
 import { ShopType } from 'src/shop/shop.type';
+import { ClubType } from 'src/club/club.type';
 
 @ObjectType('User')
 export class UserType {
@@ -37,4 +38,7 @@ export class UserType {
 
   @Field((type) => ShopType, { nullable: true })
   shop: string;
+
+  @Field((type) => ClubType, { nullable: true })
+  club: string;
 }

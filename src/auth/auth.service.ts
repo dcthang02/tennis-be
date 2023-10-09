@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   async verifyUser(authVerifyInput: AuthVerifyInput, shopId: string) {
-    const { id, birthday, name, gender } = authVerifyInput;
+    const { id, birthday, name, gender, club } = authVerifyInput;
     const user = await this.userRepository.findOneBy({ id });
     if (!user) {
       throw new NotFoundException();
@@ -56,6 +56,7 @@ export class AuthService {
     user.name = name;
     user.gender = gender;
     user.shop = shopId;
+    user.club = club;
     await this.userRepository.save(user);
     return {
       message: 'Ok',

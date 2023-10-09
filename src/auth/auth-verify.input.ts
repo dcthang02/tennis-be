@@ -19,4 +19,8 @@ export class AuthVerifyInput {
   @IsEnum(UserGender)
   @Field()
   gender: UserGender;
+
+  @IsUUID('4')
+  @Field()
+  club: string;
 }

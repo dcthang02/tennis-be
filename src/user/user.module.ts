@@ -7,6 +7,7 @@ import { StatisticModule } from 'src/statistic/statistic.module';
 import { UtilityModule } from 'src/utility/utility.module';
 import { UserController } from './user.controller';
 import { ShopModule } from 'src/shop/shop.module';
+import { ClubModule } from 'src/club/club.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ShopModule } from 'src/shop/shop.module';
     StatisticModule,
     UtilityModule,
     ShopModule,
+    ClubModule,
   ],
   providers: [UserResolver, UserService],
   exports: [UserService],

@@ -19,6 +19,8 @@ import { Statistic } from './statistic/statistic.entity';
 import { Shop } from './shop/shop.entity';
 import { Product } from './product/product.entity';
 import { ProductReview } from './product/product-review.entity';
+import { ClubModule } from './club/club.module';
+import { Club } from './club/club.entity';
 
 @Module({
   imports: [
@@ -31,7 +33,16 @@ import { ProductReview } from './product/product-review.entity';
       url: 'mongodb+srv://thang-1:khongcopass@cluster0.nuncdza.mongodb.net/tennismobile',
       autoLoadEntities: true,
       synchronize: true,
-      entities: [Match, User, Stadium, Statistic, Shop, Product, ProductReview],
+      entities: [
+        Match,
+        User,
+        Stadium,
+        Statistic,
+        Shop,
+        Product,
+        ProductReview,
+        Club,
+      ],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -46,6 +57,7 @@ import { ProductReview } from './product/product-review.entity';
     UtilityModule,
     ShopModule,
     ProductModule,
+    ClubModule,
   ],
 })
 export class AppModule {}
