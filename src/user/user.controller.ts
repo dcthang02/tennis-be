@@ -1,10 +1,18 @@
-import { Body, Controller, Post, UploadedFile } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  UploadedFile,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
 import { join } from 'path';
+import { MySuperGuard } from 'src/auth/auth.guard';
 
+@UseGuards(MySuperGuard)
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}

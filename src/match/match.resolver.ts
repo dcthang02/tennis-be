@@ -12,7 +12,11 @@ import { CreateMatchInput } from './dto/create-match.input';
 import { Match } from './match.entity';
 import { UserService } from 'src/user/user.service';
 import { StadiumService } from 'src/stadium/stadium.service';
+import { Request, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { MySuperGuard } from 'src/auth/auth.guard';
 
+@UseGuards(MySuperGuard)
 @Resolver((of) => MatchType)
 export class MatchResolver {
   constructor(

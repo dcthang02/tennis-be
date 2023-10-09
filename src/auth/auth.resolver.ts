@@ -1,6 +1,6 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
-import { AuthSignupType } from './auth.type';
+import { AuthSignupType, TokenType } from './auth.type';
 import { AuthPhoneInput } from './auth-phone.input';
 import { ShopService } from 'src/shop/shop.service';
 import { AuthVerifyInput } from './auth-verify.input';
@@ -11,6 +11,12 @@ export class AuthResolver {
     private authService: AuthService,
     private shopService: ShopService,
   ) {}
+
+  @Mutation((returns) => TokenType)
+  signinByPhone(@Args('authPhoneInput') authPhoneInput: AuthPhoneInput) {
+    const { phone } = authPhoneInput;
+    return this.authService.signinByPhone(phone);
+  }
 
   @Mutation((returns) => AuthSignupType)
   signupByPhone(@Args('authPhoneInput') AuthPhoneInput: AuthPhoneInput) {

@@ -2,18 +2,33 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/user.entity';
 import { MongoRepository } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { AuthVerifyInput } from './auth-verify.input';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private userRepository: MongoRepository<User>,
+    private jwtService: JwtService,
   ) {}
+
+  async signinByPhone(phone: string) {
+    const user = await this.userRepository.findOneBy({ phone });
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+    const payload = { phone };
+    const accessToken = await this.jwtService.sign(payload);
+    return {
+      token: accessToken,
+    };
+  }
 
   async signupByPhone(phone: string) {
     const user = await this.userRepository.findOneBy({ phone });
