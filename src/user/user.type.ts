@@ -2,6 +2,7 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { UserGender } from './user-gender.enum';
 import { StatisticType } from 'src/statistic/statistic.type';
 import { UtilityType } from 'src/utility/utility.type';
+import { ShopType } from 'src/shop/shop.type';
 
 @ObjectType('User')
 export class UserType {
@@ -10,9 +11,6 @@ export class UserType {
 
   @Field({ nullable: true })
   name: string;
-
-  @Field({ nullable: true })
-  age: number;
 
   @Field()
   phone: string;
@@ -36,4 +34,7 @@ export class UserType {
 
   @Field((type) => UtilityType, { nullable: true })
   utility: string;
+
+  @Field((type) => ShopType, { nullable: true })
+  shop: string;
 }

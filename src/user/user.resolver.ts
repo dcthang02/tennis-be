@@ -5,6 +5,7 @@ import { UserPhoneInput } from './dto/user-phone.input';
 import { User } from './user.entity';
 import { StatisticService } from 'src/statistic/statistic.service';
 import { UtilityService } from 'src/utility/utility.service';
+import { ShopService } from 'src/shop/shop.service';
 
 @Resolver((of) => UserType)
 export class UserResolver {
@@ -12,6 +13,7 @@ export class UserResolver {
     private userService: UserService,
     private statisticService: StatisticService,
     private utilityService: UtilityService,
+    private shopService: ShopService,
   ) {}
 
   @Query((returns) => UserType)
@@ -32,6 +34,15 @@ export class UserResolver {
   async utility(@Parent() user: User) {
     try {
       return await this.utilityService.getUtilityById(user.utility);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  @ResolveField()
+  async shop(@Parent() user: User) {
+    try {
+      return await this.shopService.getShopById(user.shop);
     } catch (error) {
       return null;
     }

@@ -6,9 +6,15 @@ import { UserResolver } from './user.resolver';
 import { StatisticModule } from 'src/statistic/statistic.module';
 import { UtilityModule } from 'src/utility/utility.module';
 import { UserController } from './user.controller';
+import { ShopModule } from 'src/shop/shop.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), StatisticModule, UtilityModule],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    StatisticModule,
+    UtilityModule,
+    ShopModule,
+  ],
   providers: [UserResolver, UserService],
   exports: [UserService],
   controllers: [UserController],

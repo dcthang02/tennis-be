@@ -12,7 +12,12 @@ import { CreateMatchInput } from './dto/create-match.input';
 import { Match } from './match.entity';
 import { UserService } from 'src/user/user.service';
 import { StadiumService } from 'src/stadium/stadium.service';
+import { Request, UseGuards } from '@nestjs/common';
+import { MyAuthGuard } from 'src/auth/auth.guard';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from 'src/user/user.entity';
 
+@UseGuards(MyAuthGuard)
 @Resolver((of) => MatchType)
 export class MatchResolver {
   constructor(
@@ -27,8 +32,11 @@ export class MatchResolver {
   }
 
   @Mutation(() => MatchType)
-  createMatch(@Args('createMatchInput') createMatchInput: CreateMatchInput) {
-    return this.matchService.createMatch(createMatchInput);
+  createMatch(
+    @Args('createMatchInput') createMatchInput: CreateMatchInput,
+    @GetUser() user: User,
+  ) {
+    return this.matchService.createMatch(createMatchInput, user);
   }
 
   @ResolveField()
