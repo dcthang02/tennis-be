@@ -36,6 +36,7 @@ import { ProductReview } from './product/product-review.entity';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
+      context: ({ req }) => ({ req }),
     }),
     MatchModule,
     UserModule,

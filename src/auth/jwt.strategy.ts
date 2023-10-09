@@ -12,7 +12,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     @InjectRepository(User) private userRepository: MongoRepository<User>,
   ) {
     super({
-      secretOrKey: 'THIS IS SUPER SUPER SECRET',
+      secretOrKey: 'THISISSUPERSUPERSECRET',
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     });
   }

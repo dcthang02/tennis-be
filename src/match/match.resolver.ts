@@ -13,10 +13,11 @@ import { Match } from './match.entity';
 import { UserService } from 'src/user/user.service';
 import { StadiumService } from 'src/stadium/stadium.service';
 import { Request, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { MySuperGuard } from 'src/auth/auth.guard';
+import { MyAuthGuard } from 'src/auth/auth.guard';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from 'src/user/user.entity';
 
-@UseGuards(MySuperGuard)
+@UseGuards(MyAuthGuard)
 @Resolver((of) => MatchType)
 export class MatchResolver {
   constructor(
@@ -26,7 +27,8 @@ export class MatchResolver {
   ) {}
 
   @Query(() => [MatchType])
-  matches() {
+  matches(@GetUser() user: User) {
+    console.log(user);
     return this.matchService.getMatch();
   }
 

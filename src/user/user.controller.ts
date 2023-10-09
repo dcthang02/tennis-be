@@ -10,9 +10,9 @@ import { UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
 import { join } from 'path';
-import { MySuperGuard } from 'src/auth/auth.guard';
+import { MyAuthGuard } from 'src/auth/auth.guard';
 
-@UseGuards(MySuperGuard)
+@UseGuards(MyAuthGuard)
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
