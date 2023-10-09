@@ -21,6 +21,7 @@ import { Product } from './product/product.entity';
 import { ProductReview } from './product/product-review.entity';
 import { ClubModule } from './club/club.module';
 import { Club } from './club/club.entity';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { Club } from './club/club.entity';
     ShopModule,
     ProductModule,
     ClubModule,
+    ChatModule,
   ],
 })
 export class AppModule {}
