@@ -5,6 +5,7 @@ import { MongoRepository } from 'typeorm';
 import { CreateMatchInput } from './dto/create-match.input';
 import { v4 as uuid } from 'uuid';
 import { isDateString } from 'class-validator';
+import { User } from 'src/user/user.entity';
 
 @Injectable()
 export class MatchService {
@@ -16,8 +17,8 @@ export class MatchService {
     return this.matchRepository.find();
   }
 
-  async createMatch(createMatchInput: CreateMatchInput) {
-    const { date, maxPlayers, note, owner, invitedPlayerIds, stadiumId } =
+  async createMatch(createMatchInput: CreateMatchInput, user: User) {
+    const { date, maxPlayers, note, invitedPlayerIds, stadiumId } =
       createMatchInput;
 
     const match = this.matchRepository.create({
@@ -25,9 +26,9 @@ export class MatchService {
       date: new Date(date),
       maxPlayers,
       note: note || '',
-      owner,
+      owner: user.id,
       invitedPlayers: invitedPlayerIds,
-      players: [],
+      players: [user.id],
       pendingPlayers: [],
       location: stadiumId,
     });

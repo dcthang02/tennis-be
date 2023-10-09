@@ -27,14 +27,16 @@ export class MatchResolver {
   ) {}
 
   @Query(() => [MatchType])
-  matches(@GetUser() user: User) {
-    console.log(user);
+  matches() {
     return this.matchService.getMatch();
   }
 
   @Mutation(() => MatchType)
-  createMatch(@Args('createMatchInput') createMatchInput: CreateMatchInput) {
-    return this.matchService.createMatch(createMatchInput);
+  createMatch(
+    @Args('createMatchInput') createMatchInput: CreateMatchInput,
+    @GetUser() user: User,
+  ) {
+    return this.matchService.createMatch(createMatchInput, user);
   }
 
   @ResolveField()
