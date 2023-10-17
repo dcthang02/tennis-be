@@ -23,6 +23,10 @@ export class StadiumService {
     return this.stadiumRepository.save(stadium);
   }
 
+  async getStadiums() {
+    return this.stadiumRepository.find();
+  }
+
   async getStadium(id: string) {
     const stadium = await this.stadiumRepository.findOneBy({ id });
     if (!stadium) {

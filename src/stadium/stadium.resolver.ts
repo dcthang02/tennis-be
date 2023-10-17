@@ -12,6 +12,11 @@ export class StadiumResolver {
     return this.stadiumService.getStadium(id);
   }
 
+  @Query((type) => [StadiumType])
+  stadiums() {
+    return this.stadiumService.getStadiums();
+  }
+
   @Mutation((type) => StadiumType)
   createStadium(
     @Args('createStadiumInput') createStadiumInput: CreateStadiumInput,
