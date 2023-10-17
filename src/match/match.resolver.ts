@@ -17,7 +17,6 @@ import { MyAuthGuard } from 'src/auth/auth.guard';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/user/user.entity';
 
-@UseGuards(MyAuthGuard)
 @Resolver((of) => MatchType)
 export class MatchResolver {
   constructor(
@@ -28,9 +27,21 @@ export class MatchResolver {
 
   @Query(() => [MatchType])
   matches() {
-    return this.matchService.getMatch();
+    return this.matchService.getMatches();
   }
 
+  @Query(() => MatchType)
+  match(@Args('id') id: string) {
+    return this.matchService.getMatch(id);
+  }
+
+  @UseGuards(MyAuthGuard)
+  @Query(() => [MatchType])
+  nextMatches(@GetUser() user: User) {
+    return this.matchService.getNextMatches(user);
+  }
+
+  @UseGuards(MyAuthGuard)
   @Mutation(() => MatchType)
   createMatch(
     @Args('createMatchInput') createMatchInput: CreateMatchInput,

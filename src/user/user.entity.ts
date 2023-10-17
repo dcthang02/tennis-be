@@ -25,6 +25,9 @@ export class User {
   gender: UserGender;
 
   @Column()
+  rank: number;
+
+  @Column()
   freeTime: boolean[][];
 
   @Column()

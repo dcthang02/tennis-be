@@ -3,9 +3,10 @@ import { IsDateString, Min, Max, IsUUID, IsOptional } from 'class-validator';
 
 @InputType()
 export class CreateMatchInput {
+  @IsOptional()
   @IsDateString()
-  @Field()
-  date: string;
+  @Field({ nullable: true })
+  date?: string;
 
   @Min(1)
   @Max(4)
@@ -20,7 +21,8 @@ export class CreateMatchInput {
   @Field((type) => [ID], { defaultValue: [] })
   invitedPlayerIds?: string[];
 
+  @IsOptional()
   @IsUUID('4')
-  @Field((type) => ID)
-  stadiumId: string;
+  @Field((type) => ID, { nullable: true })
+  stadiumId?: string;
 }
