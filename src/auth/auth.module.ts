@@ -7,6 +7,7 @@ import { ShopModule } from 'src/shop/shop.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
+import { Statistic } from 'src/statistic/statistic.entity';
 
 @Module({
   imports: [
@@ -16,10 +17,10 @@ import { JwtStrategy } from './jwt.strategy';
     JwtModule.register({
       secret: 'THISISSUPERSUPERSECRET',
       signOptions: {
-        expiresIn: 3600,
+        expiresIn: 86400,
       },
     }),
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, Statistic]),
     ShopModule,
   ],
   providers: [AuthResolver, AuthService, JwtStrategy],

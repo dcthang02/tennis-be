@@ -22,8 +22,11 @@ export class UserType {
   @Field({ nullable: true })
   birthday: Date;
 
-  @Field()
+  @Field({ nullable: true })
   gender: UserGender;
+
+  @Field({ nullable: true })
+  rank: number;
 
   @Field(() => [Boolean], {
     nullable: true,

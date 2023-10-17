@@ -7,6 +7,9 @@ import { StatisticService } from 'src/statistic/statistic.service';
 import { UtilityService } from 'src/utility/utility.service';
 import { ShopService } from 'src/shop/shop.service';
 import { ClubService } from 'src/club/club.service';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { UseGuards } from '@nestjs/common';
+import { MyAuthGuard } from 'src/auth/auth.guard';
 
 @Resolver((of) => UserType)
 export class UserResolver {
@@ -27,9 +30,25 @@ export class UserResolver {
     return this.userService.getUserByPhone(phone);
   }
 
+  @UseGuards(MyAuthGuard)
+  @Query((returns) => UserType)
+  me(@GetUser() user: User) {
+    return user;
+  }
+
+  @UseGuards(MyAuthGuard)
+  @Query((returns) => [UserType])
+  users(@GetUser() user: User) {
+    return this.userService.getUsers(user);
+  }
+
   @ResolveField()
   async statistic(@Parent() user: User) {
-    return this.statisticService.getStatisticById(user.statistic);
+    try {
+      return await this.statisticService.getStatisticById(user.statistic);
+    } catch (error) {
+      return null;
+    }
   }
 
   @ResolveField()

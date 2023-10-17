@@ -18,6 +18,11 @@ export class UserService {
     return user;
   }
 
+  async getUsers(user: User) {
+    const users = await this.userRepository.find();
+    return users.filter((item) => item.id !== user.id);
+  }
+
   async getUserById(id: string) {
     const user = await this.userRepository.findOneBy({ id });
     if (!user) {

@@ -7,13 +7,14 @@ export class MatchType {
   @Field((type) => ID)
   id: string;
 
-  @Field()
+  @Field({ nullable: true })
   date: Date;
 
+  @Field({ nullable: true })
   @Field()
   maxPlayers: number;
 
-  @Field()
+  @Field({ nullable: true })
   note: string;
 
   @Field((type) => UserType)

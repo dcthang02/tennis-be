@@ -1,5 +1,11 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsDateString, IsEnum, IsUUID, MinLength } from 'class-validator';
+import {
+  IsDateString,
+  IsEnum,
+  IsOptional,
+  IsUUID,
+  MinLength,
+} from 'class-validator';
 import { UserGender } from 'src/user/user-gender.enum';
 
 @InputType()
@@ -20,7 +26,8 @@ export class AuthVerifyInput {
   @Field()
   gender: UserGender;
 
+  @IsOptional()
   @IsUUID('4')
-  @Field()
-  club: string;
+  @Field({ nullable: true })
+  club?: string;
 }
